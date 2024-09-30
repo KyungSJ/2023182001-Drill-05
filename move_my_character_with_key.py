@@ -66,6 +66,8 @@ while running:
     if  right_left_move:
         framex = (framex + 1) % 8
         x += dir * 5
+        if x <= 0 or x >= 800:
+            x -= dir * 5
     if  up_down_move:
         framex = (framex + 1) % 8
         y += dir * 5
