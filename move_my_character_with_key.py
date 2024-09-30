@@ -8,7 +8,7 @@ character = load_image('my_character.png')
 
 
 def handle_events():
-    global running, dir, right_left_move, up_down_move, framey, right
+    global running, dir, right_left_move, up_down_move, framey
 
     events = get_events()
     for event in events:
@@ -19,8 +19,8 @@ def handle_events():
                 framey = 1
                 dir += 1
                 right_left_move = True
-                right = True
             elif event.key == SDLK_LEFT:
+                framey = 2
                 dir -= 1
                 right_left_move = True
             elif event.key == SDLK_UP:
@@ -49,7 +49,6 @@ def handle_events():
 running = True
 right_left_move = False
 up_down_move = False
-right = False
 
 x = 800 // 2
 y = 600 // 2
@@ -64,8 +63,7 @@ while running:
     update_canvas()
     handle_events()
     if  right_left_move:
-        if right:
-            framex = (framex + 1) % 8
+        framex = (framex + 1) % 8
         x += dir * 5
     if  up_down_move:
         y += dir * 5
