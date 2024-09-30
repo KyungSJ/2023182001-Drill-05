@@ -71,6 +71,8 @@ while running:
     if  up_down_move:
         framex = (framex + 1) % 8
         y += dir * 5
+        if y <= 0 or y >= 600:
+            y -= dir * 5
     delay(0.05)
 
 close_canvas()
