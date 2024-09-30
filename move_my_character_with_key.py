@@ -60,19 +60,19 @@ dir = 0
 while running:
     clear_canvas()
     ground.draw(400, 100)
-    character.clip_draw(framex * 60, framey * 60, 60, 60, x, y)
+    character.clip_draw(framex * 60, framey * 60, 60, 60, x, y, 100, 100)
     update_canvas()
     handle_events()
     if  right_left_move:
         framex = (framex + 1) % 8
-        x += dir * 5
+        x += dir * 10
         if x <= 0 or x >= 800:
-            x -= dir * 5
+            x -= dir * 10
     if  up_down_move:
         framex = (framex + 1) % 8
-        y += dir * 5
+        y += dir * 10
         if y <= 0 or y >= 600:
-            y -= dir * 5
+            y -= dir * 10
     delay(0.05)
 
 close_canvas()
