@@ -24,9 +24,11 @@ def handle_events():
                 dir -= 1
                 right_left_move = True
             elif event.key == SDLK_UP:
+                framey = 0
                 dir += 1
                 up_down_move = True
             elif event.key == SDLK_DOWN:
+                framey = 3
                 dir -= 1
                 up_down_move = True
             elif event.key == SDLK_ESCAPE:
@@ -35,7 +37,6 @@ def handle_events():
             if event.key == SDLK_RIGHT:
                 dir -= 1
                 right_left_move = False
-                right = False
             if event.key == SDLK_LEFT:
                 dir += 1
                 right_left_move = False
@@ -66,6 +67,7 @@ while running:
         framex = (framex + 1) % 8
         x += dir * 5
     if  up_down_move:
+        framex = (framex + 1) % 8
         y += dir * 5
     delay(0.05)
 
