@@ -8,7 +8,7 @@ character = load_image('real_my_sprite.png')
 
 
 def handle_events():
-    global running, dir, right_left_move, up_down_move, framey
+    global running, dir, right_left_move, up_down_move, framey, down
 
     events = get_events()
     for event in events:
@@ -37,15 +37,19 @@ def handle_events():
             if event.key == SDLK_RIGHT:
                 dir -= 1
                 right_left_move = False
+                down = False
             if event.key == SDLK_LEFT:
                 dir += 1
                 right_left_move = False
+                down = False
             if event.key == SDLK_UP:
                 dir -= 1
                 up_down_move = False
+                down = False
             if event.key == SDLK_DOWN:
                 dir += 1
                 up_down_move = False
+                down = True
 
 running = True
 right_left_move = False
@@ -72,7 +76,7 @@ while running:
         x += dir * 10
         if x <= 0 or x >= 800:
             x -= dir * 10
-    if  up_down_move:
+    elif  up_down_move:
         framex = (framex + 1) % 10
         y += dir * 10
         if y <= 0 or y >= 600:
