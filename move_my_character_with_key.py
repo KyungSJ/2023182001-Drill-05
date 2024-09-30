@@ -1,6 +1,6 @@
 from pico2d import *
 
-from move_character_with_key import frame
+
 
 open_canvas()
 ground = load_image('TUK_GROUND.png')
@@ -8,7 +8,7 @@ character = load_image('real_my_sprite.png')
 
 
 def handle_events():
-    global running, dir, right_left_move, up_down_move, framey, down, up, right
+    global running, dir, right_left_move, up_down_move, framey, down, up, right, left
 
     events = get_events()
     for event in events:
@@ -38,24 +38,28 @@ def handle_events():
                 dir -= 1
                 right_left_move = False
                 right = True
+                left = False
                 up = False
                 down = False
             if event.key == SDLK_LEFT:
                 dir += 1
                 right_left_move = False
                 right = False
+                left = True
                 up = False
                 down = False
             if event.key == SDLK_UP:
                 dir -= 1
                 up_down_move = False
                 right = False
+                left = False
                 up = True
                 down = False
             if event.key == SDLK_DOWN:
                 dir += 1
                 up_down_move = False
                 right = False
+                left = False
                 up = False
                 down = True
 
@@ -76,7 +80,7 @@ dir = 0
 while running:
     clear_canvas()
     ground.draw(400, 100)
-    character.clip_draw(framex * 90, framey * 97.5, 90, 97.5, x, y)
+    character.clip_draw(framex * 90, framey * 97, 90, 97, x, y)
     update_canvas()
     handle_events()
     if  right_left_move:
@@ -97,6 +101,9 @@ while running:
         framex = (framex + 1) % 1
     elif right:
         framey = 4
+        framex = (framex + 1) % 3
+    elif left:
+        framey = 6
         framex = (framex + 1) % 3
     delay(0.05)
 
