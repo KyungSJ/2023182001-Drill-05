@@ -50,6 +50,10 @@ def handle_events():
 running = True
 right_left_move = False
 up_down_move = False
+left = False
+right = False
+up = False
+down = True
 
 x = 800 // 2
 y = 600 // 2
@@ -73,6 +77,9 @@ while running:
         y += dir * 10
         if y <= 0 or y >= 600:
             y -= dir * 10
+    elif down:
+        framey = 7
+        framex = (framex + 1) % 3
     delay(0.05)
 
 close_canvas()
