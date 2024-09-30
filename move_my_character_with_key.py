@@ -4,7 +4,7 @@ from move_character_with_key import frame
 
 open_canvas()
 ground = load_image('TUK_GROUND.png')
-character = load_image('my_character.png')
+character = load_image('real_my_sprite.png')
 
 
 def handle_events():
@@ -16,7 +16,7 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_RIGHT:
-                framey = 1
+                framey = 0
                 dir += 1
                 right_left_move = True
             elif event.key == SDLK_LEFT:
@@ -24,7 +24,7 @@ def handle_events():
                 dir -= 1
                 right_left_move = True
             elif event.key == SDLK_UP:
-                framey = 0
+                framey = 1
                 dir += 1
                 up_down_move = True
             elif event.key == SDLK_DOWN:
@@ -54,22 +54,22 @@ up_down_move = False
 x = 800 // 2
 y = 600 // 2
 framex = 0
-framey = 3
+framey = 7
 dir = 0
 
 while running:
     clear_canvas()
     ground.draw(400, 100)
-    character.clip_draw(framex * 60, framey * 60, 60, 60, x, y, 100, 100)
+    character.clip_draw(framex * 90, framey * 97, 90, 97, x, y)
     update_canvas()
     handle_events()
     if  right_left_move:
-        framex = (framex + 1) % 8
+        framex = (framex + 1) % 10
         x += dir * 10
         if x <= 0 or x >= 800:
             x -= dir * 10
     if  up_down_move:
-        framex = (framex + 1) % 8
+        framex = (framex + 1) % 10
         y += dir * 10
         if y <= 0 or y >= 600:
             y -= dir * 10
