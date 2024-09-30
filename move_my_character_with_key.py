@@ -8,7 +8,7 @@ character = load_image('real_my_sprite.png')
 
 
 def handle_events():
-    global running, dir, right_left_move, up_down_move, framey, down, up
+    global running, dir, right_left_move, up_down_move, framey, down, up, right
 
     events = get_events()
     for event in events:
@@ -37,21 +37,25 @@ def handle_events():
             if event.key == SDLK_RIGHT:
                 dir -= 1
                 right_left_move = False
+                right = True
                 up = False
                 down = False
             if event.key == SDLK_LEFT:
                 dir += 1
                 right_left_move = False
+                right = False
                 up = False
                 down = False
             if event.key == SDLK_UP:
                 dir -= 1
                 up_down_move = False
+                right = False
                 up = True
                 down = False
             if event.key == SDLK_DOWN:
                 dir += 1
                 up_down_move = False
+                right = False
                 up = False
                 down = True
 
@@ -72,7 +76,7 @@ dir = 0
 while running:
     clear_canvas()
     ground.draw(400, 100)
-    character.clip_draw(framex * 90, framey * 97, 90, 97, x, y)
+    character.clip_draw(framex * 90, framey * 97.5, 90, 97.5, x, y)
     update_canvas()
     handle_events()
     if  right_left_move:
@@ -91,6 +95,9 @@ while running:
     elif up:
         framey = 5
         framex = (framex + 1) % 1
+    elif right:
+        framey = 4
+        framex = (framex + 1) % 3
     delay(0.05)
 
 close_canvas()
