@@ -7,7 +7,7 @@ character = load_image('my_character.png')
 
 
 def handle_events():
-    global running, dir, right_left_move
+    global running, dir, right_left_move, up_down_move
 
     events = get_events()
     for event in events:
@@ -20,16 +20,31 @@ def handle_events():
             elif event.key == SDLK_LEFT:
                 dir -= 1
                 right_left_move = True
+            elif event.key == SDLK_UP:
+                dir += 1
+                up_down_move = True
+            elif event.key == SDLK_DOWN:
+                dir -= 1
+                up_down_move = True
             elif event.key == SDLK_ESCAPE:
                 running = False
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
                 dir -= 1
+                right_left_move = False
             if event.key == SDLK_LEFT:
                 dir += 1
+                right_left_move = False
+            if event.key == SDLK_UP:
+                dir -= 1
+                up_down_move = False
+            if event.key == SDLK_DOWN:
+                dir += 1
+                up_down_move = False
 
 running = True
 right_left_move = False
+up_down_move = False
 x = 800 // 2
 y = 600 // 2
 frame = 0
@@ -44,6 +59,8 @@ while running:
     frame = (frame + 1) % 8
     if  right_left_move:
         x += dir * 5
+    if  up_down_move:
+        y += dir * 5
     delay(0.05)
 
 close_canvas()
